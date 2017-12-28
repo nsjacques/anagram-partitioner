@@ -94,7 +94,15 @@ public class Map {
 		
 		//adds word if library contains its class
 		//and adds a new class if it does not
+		/*
 		if (index > 0){
+			library[index].ac.addWord(word);// O(1)
+		}
+		else{
+			addAn(key, hash, new AnagramClass(word));
+		}
+		*/
+		if (library[index] != null){
 			library[index].ac.addWord(word);// O(1)
 		}
 		else{
@@ -141,6 +149,7 @@ public class Map {
 	 * 0(k) where k is word length
 	 */
 	private int keyToHash(String key){
+		/*
 		int hash = 0;
 		
 		for (int i = 0; i < key.length(); i++){// O(k)
@@ -152,6 +161,10 @@ public class Map {
 		}
 
 		return ((int)(hash % OGSIZE) * (int)Math.pow(2, numResizes)) % size;
+		*/
+		int hash = (int) key.hashCode() % library.length;
+		if (hash < 0) return hash*-1; 
+		else return hash;
 	}
 	
 	/*
@@ -164,10 +177,10 @@ public class Map {
 	 */
 	public int getIndex(String key, int hash){
 		while(hash == 0 || (library[hash] != null && library[hash].getKey().compareTo(key) != 0)){
-			hash = (hash + 1) % size;
+			hash = (hash + 1) % library.length;
 		}
 		if (library[hash] == null)
-			return ((-1)*hash);
+			return (hash);
 		else 
 			return hash;
 	}

@@ -1,6 +1,3 @@
-import java.io.*;
-import java.util.Scanner;
-
 /*
  * Noah Jacques
  * CS 311
@@ -32,18 +29,24 @@ import java.util.Scanner;
  * 2.4 GHz Intel Core i5
  * 8 GB 1600 MHz DDR3
  */
+
+import java.io.*;
+import java.util.Scanner;
+
 public class AnagramDriver {
 
 	public static void main(String[] args) throws IOException {
 		
-		String fileName;
-		//fileName = args[0];	
-		AnPartitioner part = new AnPartitioner();// O(1)
+		String fileName = args[0];	
+		AnPartitioner p = new AnPartitioner();// O(1)
 
-		fileName = "testDic3.txt";
 		//long startTime = System.nanoTime();
-		
-		String anagrams =  part.partition(fileName);// 0(n^2) + O(n*k) worst case
+
+		p.partition(fileName);// 0(n^2) + O(n*k) worst case
+
+		String anagrams = p.getAnagrams();
+
+		System.out.println(anagrams);
 		
 		//PrintWriter out = new PrintWriter(args[1]);
 		//out.println(anagrams);

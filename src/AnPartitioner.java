@@ -8,14 +8,13 @@ import java.util.Scanner;
 
 public class AnPartitioner {
 	
-	private static final int STARTCAP = 65546; // starting capacity of the map, 2^16
-	private Map anLibrary; // the library
+	private static final int STARTCAP = 256; // starting capacity of the map, 2^8
+	private Map anagramLibrary; // the library
 		
 	//O(1)
 	public AnPartitioner(){
-		anLibrary = new Map(STARTCAP);
+		anagramLibrary = new Map(STARTCAP);
 	}
-	
 	
 	/*
 	 * Processes the words in the file.
@@ -23,18 +22,19 @@ public class AnPartitioner {
 	 * 
 	 * 0(n)*( O(n) + O(k) )
 	 */
-	public String partition(String fileName) throws IOException{
+	public void partition(String fileName) throws IOException{
 		
 		Scanner scan = new Scanner(new FileReader(fileName));
 				
 		while (scan.hasNext()){
-			
-			anLibrary.addWord(scan.nextLine());//0(n) + 0(k) + O(n/2) + O(1)
-			
+			anagramLibrary.addWord(scan.nextLine());//0(n) + 0(k) + O(n/2) + O(1)
 		}
 		
 		scan.close();
-
-		return anLibrary.acToString();
 	}
+
+	public String getAnagrams(){
+		return anagramLibrary.acToString();
+	}
+
 }
