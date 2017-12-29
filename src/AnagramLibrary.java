@@ -1,5 +1,7 @@
 /*
-
+	This should extend a general library
+	Library can handle the entry and map stuff
+	This extension could then do the "addword" stuff. Ugh
 */
 
 public class AnagramLibrary implements MapInterface<String,AnagraamClass>{
@@ -12,7 +14,33 @@ public class AnagramLibrary implements MapInterface<String,AnagraamClass>{
 	final int INITAL_CAP = 256;
 	final double THRESHOLD = .7;
 
+	private class Entry(){
+		String sortedKey;
+		AnagramClass classValue;
+		private Entry(String key, AnagramClass value){
+			sortedKey = key;
+			classValue = value;
+		}
+
+		public String getKey(){
+			return sortedKey;
+		}
+		public AnagraamClass getValue(){
+			return classValue;
+		}
+		@todo
+		private String toString(){
+			return "not yet implemented";
+		}
+	}
+
 	public AnagramLibrary(){
+
+	}
+
+	public void addWord(String word){
+		anagramKey = word.sort() //OVER HEREEEE. quick vs counting vs something else sort
+		put()
 
 	}
 
@@ -27,7 +55,7 @@ public class AnagramLibrary implements MapInterface<String,AnagraamClass>{
 	*/
 	private int getIndex(Object key){
 		int hash = hash(key);
-		while (lib[hash] != null && lib[hash].key.equals(key)){
+		while (lib[hash] != null && lib[hash].getKey().equals(key)){
 			hash++;
 		}
 		return hash;
@@ -39,7 +67,6 @@ public class AnagramLibrary implements MapInterface<String,AnagraamClass>{
 	}
 
 	//public boolean containsValue(Object value);
-
 	//public boolean equals(Object o);
 
 	public boolean isEmpty(){
@@ -49,8 +76,12 @@ public class AnagramLibrary implements MapInterface<String,AnagraamClass>{
 	public V put(String key, AnagramClass value){
 		//Check capacity
 		//resize if necessary
-		Entry newEntry = new Entry<String,AnagraamClass>(key, value);
-		lib[getIndex(key)]
+		//make sure its not already contained
+		Entry newEntry = new Entry(key, value);
+		lib[getIndex(key)] = newEntry;
+		numClasses++;
+		numWords++;
+		return value;
 	}	
 
 	public V get(String key){
@@ -60,7 +91,7 @@ public class AnagramLibrary implements MapInterface<String,AnagraamClass>{
 			return null; //OVER HEREEEEE
 		}
 		else
-			return lib[index].VALUE;//OVER HEREEEE
+			return lib[index].getValue();
 	}
 
 	//public V remove(Object key);
@@ -70,7 +101,7 @@ public class AnagramLibrary implements MapInterface<String,AnagraamClass>{
 	}
 
 	public Iterator<K> iterator(){
-
+		return null;
 	}
 
 

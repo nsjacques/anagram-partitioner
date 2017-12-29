@@ -24,7 +24,7 @@ public class AnPartitioner {
 	 */
 	public void partition(String fileName) throws IOException{
 		
-		Scanner scan = new Scanner(new FileReader(fileName));
+		Scanner scan = new Scanner(new FileReader(fileName));//bufferedReaders??
 				
 		while (scan.hasNext()){
 			anagramLibrary.addWord(scan.nextLine());//0(n) + 0(k) + O(n/2) + O(1)
