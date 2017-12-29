@@ -4,38 +4,13 @@
 	This extension could then do the "addword" stuff. Ugh
 */
 
-public class AnagramLibrary implements MapInterface<String,AnagraamClass>{
+public class AnagramLibrary extends Library<String,AnagramClass>{
 	
 	int numClasses;
 	int numWords;
-	int capacity;
-	Entry[] lib;
-
-	final int INITAL_CAP = 256;
-	final double THRESHOLD = .7;
-
-	private class Entry(){
-		String sortedKey;
-		AnagramClass classValue;
-		private Entry(String key, AnagramClass value){
-			sortedKey = key;
-			classValue = value;
-		}
-
-		public String getKey(){
-			return sortedKey;
-		}
-		public AnagraamClass getValue(){
-			return classValue;
-		}
-		@todo
-		private String toString(){
-			return "not yet implemented";
-		}
-	}
 
 	public AnagramLibrary(){
-
+		super();
 	}
 
 	public void addWord(String word){

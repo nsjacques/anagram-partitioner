@@ -4,25 +4,50 @@
 
 public class AnagramClass {
 	
-	private APNode<String> head;
+	private Node<String> head;
 	private String line = ""; //String representation of class: "abc, acb, bca\n"
 	
-	//O(1)
+	public class Node<T> {
+		private T content;
+		private Node<T> link;
+
+		public Node(T c){
+			content = c;
+			link = null;
+		}
+
+		public T getContent(){
+			return this.content;
+		}
+
+		public void setContent(T c){
+			content = c;
+		}
+		
+		public Node<T> getLink(){
+			return link;
+		}
+
+		public void setLink(Node<T> N){
+			link = N;
+		}
+	}
+
 	public AnagramClass(String word){
-		head = new APNode<String>(word);
+		head = new Node<String>(word);
 		line = word + "\n";
 	}
 	
 	//O(1)
 	public void addWord(String word){
-		APNode<String> newWord = new APNode<String>(word);
+		Node<String> newWord = new Node<String>(word);
 		newWord.setLink(head);
 		head = newWord;
 		line = word + ", " + line;
 	}
 	
 	//O(1)
-	public String getLine(){
+	public String toString(){
 		return line;
 	}
 }
