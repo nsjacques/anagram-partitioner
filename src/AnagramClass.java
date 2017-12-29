@@ -40,6 +40,7 @@ public class AnagramClass {
 	
 	//O(1)
 	public void addWord(String word){
+		//This doesn't handle repeats
 		Node<String> newWord = new Node<String>(word);
 		newWord.setLink(head);
 		head = newWord;

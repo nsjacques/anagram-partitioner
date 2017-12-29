@@ -42,11 +42,9 @@ public class AnagramDriver {
 
 		//long startTime = System.nanoTime();
 
-		p.partition(fileName);// 0(n^2) + O(n*k) worst case
+		AnagramLibrary lib = p.partition(fileName);// 0(n^2) + O(n*k) worst case
 
-		String anagrams = p.getAnagrams();
-
-		System.out.println(anagrams);
+		System.out.println(p.getAnagrams());
 		
 		//PrintWriter out = new PrintWriter(args[1]);
 		//out.println(anagrams);

@@ -9,11 +9,11 @@ import java.util.Scanner;
 public class AnPartitioner {
 	
 	private static final int STARTCAP = 256; // starting capacity of the map, 2^8
-	private Map anagramLibrary; // the library
+	private AnagramLibrary lib; // the library
 		
 	//O(1)
 	public AnPartitioner(){
-		anagramLibrary = new Map(STARTCAP);
+		lib = new AnagramLibrary();//(STARTCAP);
 	}
 	
 	/*
@@ -22,19 +22,21 @@ public class AnPartitioner {
 	 * 
 	 * 0(n)*( O(n) + O(k) )
 	 */
-	public void partition(String fileName) throws IOException{
+	public AnagramLibrary partition(String fileName) throws IOException{
 		
 		Scanner scan = new Scanner(new FileReader(fileName));//bufferedReaders??
 				
 		while (scan.hasNext()){
-			anagramLibrary.addWord(scan.nextLine());//0(n) + 0(k) + O(n/2) + O(1)
+			lib.addWord(scan.nextLine());//0(n) + 0(k) + O(n/2) + O(1)
 		}
 		
 		scan.close();
+
+		return lib;
 	}
 
 	public String getAnagrams(){
-		return anagramLibrary.acToString();
+		return lib.toString();
 	}
 
 }

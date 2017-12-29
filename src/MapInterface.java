@@ -2,9 +2,9 @@
 
 */
 
-public interface MapInterface<K,V> extends iterable<K>{
+public interface MapInterface<K,V> {//extends Iterable<K>{
 
-	public void clear();
+	//public void clear();
 
 	public boolean containsKey(Object key);
 
@@ -22,6 +22,6 @@ public interface MapInterface<K,V> extends iterable<K>{
 
 	public int size();
 
-	public Iterator<K> iterator();
+	//public Iterator<K> iterator();
 
 }

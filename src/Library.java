@@ -10,22 +10,22 @@ public class Library<K,V> implements MapInterface<K,V>{
 	final int INITAL_CAP = 256;///These should be generic
 	final double THRESHOLD = .7;
 
-	private class Entry()<K,V>{
+	private class Entry{
 		K key;
 		V value;
 
-		private Entry(K key, V value){
+		public Entry(K key, V value){//permissions?
 			this.key = key;
 			this.value = value;
 		}
 
-		public K getKey(){
+		public K getKey(){//do i even need getters? why not direct
 			return key;
 		}
 		public V getValue(){
 			return value;
 		}
-		private String toString(){
+		public String toString(){
 			return "not yet implemented";
 		}
 	}
@@ -60,10 +60,10 @@ public class Library<K,V> implements MapInterface<K,V>{
 	//public boolean equals(Object o);
 
 	public boolean isEmpty(){
-		return numClasses == 0;
+		return size == 0;
 	}
 
-	public V put(String key, AnagramClass value){
+	public V put(K key, V value){
 		if (containsKey(key)){
 			return value;//HMMMMMMM
 		}
@@ -77,10 +77,10 @@ public class Library<K,V> implements MapInterface<K,V>{
 		return value;
 	}	
 
-	public V get(String key){
+	public V get(K key){
 		int index = getIndex(key);
 		if (lib[index] == null){
-			System.out.println("\nNot in lib\n")
+			System.out.println("\nNot in lib\n");
 			return null; //OVER HEREEEEE
 		}
 		else
@@ -93,8 +93,12 @@ public class Library<K,V> implements MapInterface<K,V>{
 		return capacity;
 	}
 
-	public Iterator<K> iterator(){
-		return null;
+	//public Iterator<K> iterator(){
+	//	return null;
+	//}
+
+	public void resize(){
+
 	}
 
 
