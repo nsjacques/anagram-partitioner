@@ -3,7 +3,7 @@
 import java.util.Iterator;
 
 
-public class Library<K,V> implements MapInterface<K,V>, Iterable<Entry>{//do i need to specify entry since it is in MI?
+public class Library<K,V> implements MapInterface<K,V>{//, Iterable<Entry>{//do i need to specify entry since it is in MI?
 
 	private static class Entry<K,V>{
 		public K key;
@@ -19,7 +19,7 @@ public class Library<K,V> implements MapInterface<K,V>, Iterable<Entry>{//do i n
 		}
 	}
 
-	private class NonNullEntryIterator implements Iterator<Entry>{
+	/*private class NonNullEntryIterator implements Iterator<Entry>{
 
 		int curr = 0;
 		int seen = 0;
@@ -48,6 +48,7 @@ public class Library<K,V> implements MapInterface<K,V>, Iterable<Entry>{//do i n
 
 		}
 	}
+	*/
 
 
 	final int INITIAL_CAP = 256;///These should be passed in
@@ -137,7 +138,6 @@ public class Library<K,V> implements MapInterface<K,V>, Iterable<Entry>{//do i n
 		int newCap = oldCap*2;
 		Entry<K,V>[] oldLib = lib;
 		Entry<K,V>[] newLib = new Entry[newCap];
-		Iterator<K> iter = this.iterator();
 
 		for(Entry e : oldLib){
 			//make list of all entries(k,v pairs); THEN add to new lib
