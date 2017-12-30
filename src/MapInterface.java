@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public interface MapInterface<K,V>{//} extends Iterable<Z>{
 
-	//public void clear();
+	public void clear();
 
 	public boolean containsKey(Object key);
 

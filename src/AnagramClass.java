@@ -5,7 +5,7 @@
 public class AnagramClass {
 	
 	private Node<String> head;
-	private String line = ""; //String representation of class: "abc, acb, bca\n"
+	private String line = "";//ex: "abc, acb, bca\n"
 	
 	public class Node<T> {
 		private T content;
@@ -38,7 +38,6 @@ public class AnagramClass {
 		line = word + "\n";
 	}
 	
-	//O(1)
 	public void addWord(String word){
 		//This doesn't handle repeats
 		Node<String> newWord = new Node<String>(word);
@@ -47,7 +46,6 @@ public class AnagramClass {
 		line = word + ", " + line;
 	}
 	
-	//O(1)
 	public String toString(){
 		return line;
 	}

@@ -30,6 +30,14 @@
  * 8 GB 1600 MHz DDR3
  */
 
+/*
+
+All my todos for this project:
+
+
+
+*/
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -37,21 +45,20 @@ public class AnagramDriver {
 
 	public static void main(String[] args) throws IOException {
 		
-		String fileName = args[0];	
+		String fileName = args[0];
+
 		AnPartitioner p = new AnPartitioner();// O(1)
 
-		//long startTime = System.nanoTime();
-
+		long startTime = System.nanoTime();
 		AnagramLibrary lib = p.partition(fileName);// 0(n^2) + O(n*k) worst case
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime); 
+		System.out.println("total duration in milli: " + duration/1000000);
 
 		System.out.println(p.getAnagrams());
-		
+
 		//PrintWriter out = new PrintWriter(args[1]);
 		//out.println(anagrams);
 		//out.close();
-		
-		//long endTime = System.nanoTime();
-		//long duration = (endTime - startTime); 
-		//System.out.println("total duration in milli: " + duration/1000000);
 	}
 }

@@ -8,30 +8,24 @@ import java.util.Scanner;
 
 public class AnPartitioner {
 	
-	private static final int STARTCAP = 256; // starting capacity of the map, 2^8
-	private AnagramLibrary lib; // the library
+	private static final int CAP_INITIAL = 131072; // starting capacity of the map, 2^8
+	private AnagramLibrary lib;
 		
-	//O(1)
 	public AnPartitioner(){
-		lib = new AnagramLibrary();//(STARTCAP);
+		lib = new AnagramLibrary(CAP_INITIAL);//(STARTCAP);
 	}
 	
 	/*
-	 * Processes the words in the file.
-	 * It retrieves the word and adds the word to the library.
-	 * 
-	 * 0(n)*( O(n) + O(k) )
+
 	 */
 	public AnagramLibrary partition(String fileName) throws IOException{
 		
 		Scanner scan = new Scanner(new FileReader(fileName));//bufferedReaders??
-				
 		while (scan.hasNext()){
-			lib.addWord(scan.nextLine());//0(n) + 0(k) + O(n/2) + O(1)
+			lib.addWord(scan.nextLine());
 		}
 		
 		scan.close();
-
 		return lib;
 	}
 

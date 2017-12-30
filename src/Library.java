@@ -51,37 +51,37 @@ public class Library<K,V> implements MapInterface<K,V>{//, Iterable<Entry>{//do 
 	*/
 
 
-	final int INITIAL_CAP = 256;///These should be passed in
+	final int INITIAL_CAP;///These should be passed in
 	final double THRESHOLD = .7;
 
 	int size;
 	int capacity;
 	Entry<K,V>[] lib;
 
-	public Library(){
+	public Library(int cap){
+		INITIAL_CAP = cap;
 		lib = new Entry[INITIAL_CAP];//pass up types
 		this.capacity = INITIAL_CAP;
 	}
 
-	//public void clear(){}
+	public void clear(){
+		//this = new Library(INITIAL_CAP); //is this possible?
+		capacity = INITIAL_CAP;
+		size = 0;
+		lib = new Entry[capacity];
+	}
 
 	public boolean containsKey(Object key){
-		return lib[getIndex(key,capacity)] != null;
+		return lib[getIndex(key,capacity, lib)] != null;
 	}
 
 	/*
 	Either gets index for key's AC or return first empty one
 	*/
-	private int getIndex(Object key, int cap){
+	private int getIndex(Object key, int cap, Entry<K,V>[] lib){
 		int hash = hash(key, cap);
-		System.out.printf("Size: %d Cap: %d\n", size, cap);
-		System.out.println("lib[hash]: " + lib[hash] +"hash: "+ hash);
 		while (lib[hash] != null && !lib[hash].key.equals(key)){
 			hash = (hash+1) % cap;
-		}
-		if (lib[hash] != null){
-			System.out.println("our key " + key +" found key "+ lib[hash].key);
-			System.out.printf("Does %s equal %s: %b",key,lib[hash].key,lib[hash].key.equals(key));
 		}
 		return hash;
 	}
@@ -99,27 +99,20 @@ public class Library<K,V> implements MapInterface<K,V>{//, Iterable<Entry>{//do 
 	}
 
 	public V put(K key, V value){
-		if (containsKey(key)){
-			return value;//HMMMMMMM
-		}
-		if (size == capacity*THRESHOLD){
+
+		if (size > capacity*THRESHOLD){
 			resize();
 		}
 
 		Entry<K,V> newEntry = new Entry<K,V>(key, value);
-		lib[getIndex(key, capacity)] = newEntry;
+		lib[getIndex(key, capacity, lib)] = newEntry;
 		size++;
 		return value;
 	}	
 
 	public V get(K key){
-		int index = getIndex(key,capacity);
-		if (lib[index] == null){
-			System.out.println("\nNot in lib\n");
-			return null; //OVER HEREEEEE
-		}
-		else
-			return lib[index].value;
+		int index = getIndex(key,capacity, lib);
+		return lib[index].value;
 	}
 
 	//public V remove(Object key);
@@ -128,48 +121,28 @@ public class Library<K,V> implements MapInterface<K,V>{//, Iterable<Entry>{//do 
 		return capacity;
 	}
 
+	/*
 	public Iterator<Entry> iterator(){
 		return new NonNullEntryIterator();
 	}
+	*/
 
 	public void resize(){
-		System.out.println("\n\nTRYING TO RESIZE\n\n");
 		int oldCap = capacity;
 		int newCap = oldCap*2;
-		Entry<K,V>[] oldLib = lib;
 		Entry<K,V>[] newLib = new Entry[newCap];
 
-		for(Entry e : oldLib){
-			//make list of all entries(k,v pairs); THEN add to new lib
-			System.out.println("Is this working????");
-			newLib[getIndex(e.key, newCap)] = e;
+		for(Entry<K,V> e : lib){
+			if (e != null)
+				newLib[getIndex(e.key, newCap, newLib)] = e;
 		}
-
-		//iterate through old one and store each Entry in its new hash location for new lib[]
 		
-		//old lib = new lib
+		lib = newLib;
+		capacity = newCap;
 	}
 
 	public String toString(){
 		return "trying to print lib";
 	}
-
-	//only works for english alphabet
-	/*
-	private String sort1(String s){
-		Char[] cs = s.toLowerCase().toCharArray()
-		int[] buckets = new int[26];
-		Char[] scs = new Char[cs.length];
-		for(char c : cs){
-			buckets[c]++;
-		}
-		int 
-		for(int i : buckets){
-			bucket[c]*c;
-		}
-
-	}
-	*/
-
 
 }

@@ -7,20 +7,22 @@ public class AnagramLibrary extends Library<String,AnagramClass>{
 	int numClasses;
 	int numWords;
 
-	public AnagramLibrary(){
-		super();
+	public AnagramLibrary(int cap){
+		super(cap);
 	}
 
 	public void addWord(String word){
-		//check capacity
-		if (size > capacity*THRESHOLD)
-			resize();
-		String anagramKey = sort(word); //OVER HEREEEE. quick vs counting vs something else sort
-		System.out.println("word: " + word);
-		if (this.containsKey(anagramKey))
-			this.get(anagramKey).addWord(word);
-		else
-			this.put(anagramKey, new AnagramClass(word));
+
+		String key = sort(word); //OVER HEREEEE. quick vs counting vs something else sort
+		
+		if (this.containsKey(key)){
+			this.get(key).addWord(word);
+		}
+		else{
+			this.put(key, new AnagramClass(word));
+			numClasses++;
+		}
+		numWords++;
 	}
 
 	private String sort(String word){
@@ -42,6 +44,27 @@ public class AnagramLibrary extends Library<String,AnagramClass>{
             histogram[chars[i] - 'a'] += 1;
         }
         return new String(output);
+	}
+
+	//only works for english alphabet
+	/*
+	private String sort1(String s){
+		Char[] cs = s.toLowerCase().toCharArray()
+		int[] buckets = new int[26];
+		Char[] scs = new Char[cs.length];
+		for(char c : cs){
+			buckets[c]++;
+		}
+		int 
+		for(int i : buckets){
+			bucket[c]*c;
+		}
+
+	}
+	*/
+
+	public String toString(){
+		return String.format("\nFinal Output.\n#words: %d\n#classes: %d", numWords, numClasses);
 	}
 
 
