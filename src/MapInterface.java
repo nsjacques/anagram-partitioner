@@ -2,7 +2,10 @@
 
 */
 
-public interface MapInterface<K,V> {//extends Iterable<K>{
+import java.util.Iterator;
+
+
+public interface MapInterface<K,V> extends Iterable<Z>{
 
 	//public void clear();
 
@@ -22,6 +25,6 @@ public interface MapInterface<K,V> {//extends Iterable<K>{
 
 	public int size();
 
-	//public Iterator<K> iterator();
+	public Iterator<Z> iterator();
 
 }
