@@ -31,10 +31,22 @@
  */
 
 /*
-
 All my todos for this project:
 
+figure out the warnings
+	really understand the inheritence/generic/interface/subclass stuff
 
+make it faster? its asymptotically linear but is 36ish seconds necessary?
+
+fix all the documentation/readme
+
+update the sort method
+
+make it adhere closer to java conventions?
+
+make it more commandline option based (timing, etc)
+
+generalize generalize generalize
 
 */
 
@@ -47,18 +59,20 @@ public class AnagramDriver {
 		
 		String fileName = args[0];
 
-		AnPartitioner p = new AnPartitioner();// O(1)
+		AnPartitioner p = new AnPartitioner();
 
 		long startTime = System.nanoTime();
-		AnagramLibrary lib = p.partition(fileName);// 0(n^2) + O(n*k) worst case
+		AnagramLibrary lib = p.partition(fileName);
 		long endTime = System.nanoTime();
 		long duration = (endTime - startTime); 
 		System.out.println("total duration in milli: " + duration/1000000);
 
 		System.out.println(p.getAnagrams());
 
-		//PrintWriter out = new PrintWriter(args[1]);
-		//out.println(anagrams);
-		//out.close();
+		if (args.length>1){
+			PrintWriter out = new PrintWriter(args[1]);
+			out.println(anagrams);
+			out.close();
+		}
 	}
 }
