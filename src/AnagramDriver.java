@@ -48,6 +48,8 @@ make it more commandline option based (timing, etc)
 
 generalize generalize generalize
 
+exception handling !!!
+
 */
 
 import java.io.*;
@@ -71,7 +73,7 @@ public class AnagramDriver {
 
 		if (args.length>1){
 			PrintWriter out = new PrintWriter(args[1]);
-			out.println(anagrams);
+			out.println(lib);
 			out.close();
 		}
 	}
